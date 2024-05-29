@@ -1,16 +1,15 @@
 <script>
     export default {
-        data() {
-            return {
-                selected: false,
-            }
-        },
         methods: {
             on_click() {
-                this.selected = !this.selected;
-                this.$emit('childselected', this.selected, this.$refs.wordSlot.textContent);
+                // This is incredibly jank but hear me out.
+                // 1. Send opposite selection state to the parent component (Game.vue)
+                // 2. Parent component will swap state in this.connections
+                // 3. Prop 'selected' is reactive, and updates accordingly.
+                this.$emit('childselected', !this.selected, this.$refs.wordSlot.textContent);
             }
         },
+        props: ['selected'],
         emits: ['childselected']
     }
 </script>
@@ -26,8 +25,6 @@
         background-color: var(--button-unselected);
         border: none;
         margin: 3px 3px 12px 12px;
-        height: 80px;
-        width: 200px;
     }
     .selected {
         background-color: var(--button-selected);
