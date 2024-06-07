@@ -1,7 +1,7 @@
 <script>
     export default {
         mounted() {
-            this.seed = this.generateSeed(this.getState().length);
+            this.seed = this.generateSeed(this.getState.length);
         },
         data() {
             return {
@@ -56,7 +56,7 @@
                 flattenedConnections: [],
             }
         },
-        methods: {
+        computed: {
             getState() {
                 // Initialize array
                 let words = []
@@ -77,7 +77,9 @@
 
                 // return
                 return words;
-            },
+            }
+        },
+        methods: {
             onGuess() {
                 // Get word array length
                 const wordsLength = this.connections[0].words.length;
@@ -134,7 +136,7 @@
                 }
             },
             onShuffle() {
-                this.seed = generateSeed(this.seed.length);
+                this.seed = this.generateSeed(this.seed.length);
             },
             generateSeed(length) {
                 // Shuffle algorithm
@@ -149,25 +151,78 @@
     }
 </script>
 <template>
-    <div id="gameBoard" class="game-board">
-        <solved-label v-for="solvedCtn in this.solvedConnections" :ctn-data="solvedCtn" :class="`connection-${solvedCtn.id}`">{{solvedCtn.hint}}</solved-label>
-        <template v-for="unsolvedCtn in this.getState()">
-            <game-button v-if="!unsolvedCtn.solved" v-on:childselected="onSelected" :selected="unsolvedCtn.selected">{{unsolvedCtn.word}}</game-button>
-        </template>
-        <!-- <template v-for="ctn in this.connections" :ctn-data="ctn" :solved="ctn.solved">
-            <game-button v-if="!ctn.solved" v-for="wordData in ctn.words" v-on:childselected="onSelected" :selected="wordData.selected">{{wordData.word}}</game-button>
-            <solved-label v-if="ctn.solved" :ctn-data="ctn" :class='`connection-${ctn.id}`'>{{ctn.hint}}</solved-label>
-        </template> -->
+    <div class="content">
+        <h1 class="title">Connections</h1>
+        <div class="game-board">
+            <solved-label v-for="solvedCtn in this.solvedConnections" :ctn-data="solvedCtn" :class="`connection-${solvedCtn.id}`">{{solvedCtn.hint}}</solved-label>
+            <transition-group name="reorder">
+                <template v-for="unsolvedCtn in this.getState">
+                    <game-button v-if="!unsolvedCtn.solved" v-on:childselected="onSelected" :selected="unsolvedCtn.selected">{{unsolvedCtn.word}}</game-button>
+                </template>
+            </transition-group>
+        </div>
+        <div class="buttons">
+            <button class="btn-guess btn" v-on:click="this.onGuess">Guess</button>
+            <button class="btn-shuffle btn" v-on:click="this.onShuffle">Shuffle Words</button>
+        </div>
     </div>
-    <button id="btn-shuffle" v-on:click="this.onShuffle">Shuffle Words</button>
-    <button id="btn-guess" v-on:click="this.onGuess">Guess</button>
 </template>
-<style>
+<style scoped>
+    /*   Containers   */
+    .content {
+        padding-top: 12px;
+        padding-left: 12px;
+        padding-right: 12px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
     .game-board {
         display: grid;
-        grid-template: 100px 100px 100px 100px / 20% 20% 20% 20%;
+        grid-template: 75px 75px 75px 75px / 24% 24% 24% 24%;
         justify-content: center;
-        width: 80vw;
-        margin: auto auto auto auto;
+        gap: 6px;
+    }
+    .buttons {
+        margin-top: 6px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn {
+        height: 75px;
+        background-color: rgb(207, 164, 207);
+        font-size: x-large;
+        border: none;
+        margin-top: 8px;
+    }
+    .btn:hover {
+        filter: brightness(1.15);
+        cursor: pointer;
+    }
+    * {
+        font-family:'Courier New', Courier, monospace;
+        font-weight: bold;
+        font-variant: small-caps;
+        text-transform: lowercase;
+      }
+    /*    BREAKPOINTS    */
+    @media (min-width: 680px) {
+        .buttons {
+            flex-direction: row-reverse;
+            gap: 6px;
+        }
+        .btn {
+            flex: 1 1 0px;
+        }
+    }
+    @media (min-width: 768px) {
+        .game-board {
+            grid-template: 75px 75px 75px 75px / 20% 20% 20% 20%;
+        }
+        .content {
+            padding-left: 64px;
+            padding-right: 64px;
+        }
     }
 </style>

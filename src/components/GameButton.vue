@@ -24,7 +24,7 @@
     .game-button {
         background-color: var(--button-unselected);
         border: none;
-        margin: 3px 3px 12px 12px;
+        font-size: 1rem;
     }
     .selected {
         background-color: var(--button-selected);

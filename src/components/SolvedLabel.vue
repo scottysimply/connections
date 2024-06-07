@@ -9,7 +9,7 @@
         <p class="solved-words"><span v-for="word in ctnData.words" class="word">{{word.word}}</span></p>
     </div>
 </template>
-<style>
+<style scoped>
     .connection-1 {
         background-color: #f6ec91;
     }
@@ -22,9 +22,16 @@
     .connection-4 {
         background-color: #ac8bd6;
     }
+    .solved-hint {
+        margin-top: 12px;
+        margin-bottom: 0px;
+        font-size: larger;
+    }
+    .solved-words {
+        margin-top: 6px;
+    }
     .solved-connection {
         grid-column: 1/-1;
-        margin: 3px 3px 12px 12px;
         text-align: center;
     }
     .word:not(:last-child)::after {
