@@ -32,6 +32,11 @@ jobs:
         npm run build --if-present
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v3
+    - name: Debugging because im new and this is hard
+      if: failure()
+      run: |
+        find ~/.npm/_logs -type f
+        cat ~/.npm/_logs/*.log
   deploy:
     environment:
       name: github-pages
