@@ -19,7 +19,7 @@
                     },
                     {
                         id: 2,
-                        hint: "Gears",
+                        hint: "Gear Terms",
                         words: [
                             {word:"Ratio", selected: false},
                             {word:"Teeth", selected: false},
@@ -30,23 +30,23 @@
                     },
                     {
                         id: 3,
-                        hint: "Alcoholic Colors",
+                        hint: "Math Functions",
                         words: [
-                            {word:"Marsala", selected: false},
-                            {word:"Chartreuse", selected: false},
-                            {word:"Sauterne", selected: false},
-                            {word:"Burgundy", selected: false},
+                            {word:"Sin", selected: false},
+                            {word:"Sec", selected: false},
+                            {word:"Pow", selected: false},
+                            {word:"Add", selected: false},
                         ],
                         solved: false,
                     },
                     {
                         id: 4,
-                        hint: "Animals With Weird Names",
+                        hint: "Sparkle, minus a letter",
                         words: [
-                            {word:"Dik Dik", selected: false},
-                            {word:"Hyrax", selected: false},
-                            {word:"Caecilian", selected: false},
-                            {word:"Springhaas", selected: false},
+                            {word:"Sine", selected: false},
+                            {word:"Glo", selected: false},
+                            {word:"Lint", selected: false},
+                            {word:"Glam", selected: false},
                         ],
                         solved: false,
                     },
